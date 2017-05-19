@@ -1,0 +1,394 @@
+%種々宣言
+\documentclass[12pt, oneside]{jreport}   	
+\usepackage{geometry}                		
+\geometry{letterpaper}                   		
+\usepackage[dvipdfmx]{graphicx}				
+\usepackage{listings,jlisting}										
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{here}
+
+%文書開始
+\begin{document}
+
+
+%タイトルページ
+\begin{center}
+
+{\Huge ソフトウェア要求仕様書}
+
+\vspace{15mm}
+
+{\huge 「DiscussionVisualizerの改良」}
+
+\vspace{30mm}
+
+{\Large 東京工業大学情報工学科　佐伯研究室}
+
+\vspace{10mm}
+
+{\large 高橋　碧 (Takahashi Aoi)}
+
+\vspace{1mm}
+
+{\large 梅田　侑 (Umeda Yuu)}
+
+\end{center}
+
+\newpage 
+
+
+%目次ページ
+\tableofcontents
+\clearpage
+
+
+%本文開始
+
+\chapter{仕様書の概要}
+
+	\section{目的}
+	本要求仕様書は、Issue Tracking System (ITS) 上のIssueの議論の流れを構造化して視覚的に表示するツールである「DiscussionVisualizer」を改良することによって、ITS利用者が議論の流れをより把握しやすくすることを目的とする。また、改良した「DiscussionVisualizer」が満たすべき要求やその理由、制約などを記述する。本ツールの開発者及びステークホルダを対象読者とする。
+	
+	\section{範囲}
+	本ツールはITS利用者のIssueの内容把握を支援する。また、本ツールでのITSはJiraを対象とし、JiraにあるIssueに関しての議論構造の生成や、編集を行う。このツールを利用することで、Issue上の議論の流れを視覚的に捉えることができるという利点があり、またツール自体のユーザビリティを向上させることでそれらの利点を最大限生かせるようにする。さらに、協調作業支援機能 (CSCW) も向上させることで、個人でのIssueの理解だけでなく、複数人でのIssueの理解を共有できるようにする。
+	
+	これらの内容を満たすことで、「DiscussionVisualizer」をより良いツールにすることが目的である。
+
+	\section{用語定義}
+	%未実装
+	\begin{table}[htb]
+		\begin{center}
+		\caption{用語定義}
+  		\begin{tabular}{|c|c|} \hline
+    		用語 & 定義 \\ \hline \hline
+    		DiscussionVisualizer & \shortstack{昨年度、佐伯研究室に所属していた大内さんが作成した\\Issue上の議論構造可視化と理解支援をするツールのこと}  \\ \hline
+		プロジェクト & Jira上に設けられているプロジェクトのこと  \\ \hline
+		Issue & Jira上に設けられているIssueのこと。プロジェクトごとに存在する。  \\ \hline
+    		議論構造 & Issue上の議論をGraphvizを用いて木構造として可視化したグラフのこと  \\ \hline
+    		CSCW & 強調作業支援機能。複数人でツールを利用し、作業を進めるための機能  \\ \hline
+    		コメント & \shortstack{JiraのIssue上のコメントを抽出し、議論構造と同時に\\「DiscussionVisualizer」に表示されているもの}  \\ \hline
+		タグ付け & コメントに対して、特定のタグを付けること  \\ \hline
+		フィルタリング & コメントに付いているタグに従って、コメントの一部を表示する機能  \\ \hline
+    		議論参加者 & Jiraの中でコメントをしている人の名前  \\ \hline
+  		\end{tabular}
+  		\end{center}
+	\end{table}	
+	
+	\newpage
+	
+	\section{概要}
+	本要求仕様書では、第2章の概要で、要求分析の結果考えられる現状の問題点に関して、具体的に確認する。また本ツールの機能の概要を記述する。第3章の要求仕様では、本ツールの詳細な機能の仕様について記述する。
+	
+
+\chapter{全容}
+
+	\section{製品の背景}
+	現状のツールの問題点は、大きく2つありユーザビリティとCSCWである。
+	
+	ユーザビリティについて、現状では議論構造を編集しづらく、タグ付けをしたコメントに対するフィルタリングの種類が少ないことによる、コメントの整理のしづらさがある。他には、Issueが全て同じ階層で一覧になっているため、多くのIssueを管理する際にとても見づらい。また、JiraではIssueごとにIssue間の関係が定義されているが、その関係を「DiscussionVisualizer」では抽出できていないため、管理したいIssueがどのIssueと関係があるのか分からない。このような問題点がある。
+	
+	CSCWについて、現状では個人でのIssue管理を目的としてツールが作られているため、共同でIssue管理をすることができない。このことは、複数人でIssue管理をしたい場合には致命的な問題点である。
+	
+	これらの問題点を解決するために、いくつかの機能を実装する。
+	
+	\section{製品機能}
+	ユーザビリティに関して、本企画では以下の4つの機能により、上記の問題点を解決する。
+	\begin{itemize}
+		\item 議論構造の編集・整理のユーザビリティ向上
+		\\
+		　議論構造の編集のしやすさを向上させ、編集のコストを軽減させる。
+		\item タグに対するフィルタリングの種類の追加
+		\\
+		　フィルタリングの種類を増やすことで、タグ付けを最大限生かし、コメントを整理しやすくする。
+		\item プロジェクトごとのグループ化
+		\\
+		　Issueを同じ階層で一覧にするのではなく、プロジェクトごとにIssueを一覧にすることで、Issueが多くなった場合にも見やすさを維持する。
+		\item 複数Issue間の関係の可視化
+		\\
+		　Jiraに元々存在する関係を抽出し、表示することで、Issue間の関係を分かりやすくする。
+	\end{itemize}
+	
+	また、自動でタグ付けをする機能を拡張し、ユーザが任意の議論参加者に対してタグ名を登録し、その議論参加者に自動でタグ付けをする機能も実装する。
+	\\
+	
+	CSCWに関して、本企画では以下の4つの機能により、上記の問題点を解決する。
+	\begin{itemize}
+		\item ユーザ名の追加
+		\\
+		　アカウントに対して、ユーザ名を追加し共同作業の際に自身を特定する名前を設ける。
+		\item Issue一覧の共有
+		\\
+		　Issue一覧を共有することで、複数人で共有しながら、Issueを追加したり閲覧できたりする。
+		\item 議論構造の共有
+		\\
+		　議論構造を共有することで、複数人で共有しながら、議論構造を編集したり、整理できたりする。
+		\item Issueごとに担当者・状態の管理
+		\\
+		　Issueごとに担当者や状態を管理することで、複数人で共有しながら、Issueを管理できる。
+	\end{itemize}
+
+	\section{仮定および依存性}
+	本ツールでは、ITSとしてJiraを利用していること、また元の「DiscussionVisualizer」を利用することが可能である環境を仮定している。
+
+\chapter{要求仕様}
+
+	\section{外部インターフェイス要求}
+		
+		\subsection{ユーザインターフェイス要求}
+		初回利用時には、新規アカウントを作成する。そうでない場合にはログインをして本ツールを利用する。新規アカウント作成の場合には、ユーザ名、メールアドレス、パスワードを入力する必要がある。ログインの場合には、メールアドレスとパスワードを入力する必要がある。JiraのIssueのURLを新規Issue作成のページから入力することで議論構造を自動生成し、その議論構造に対してユーザは閲覧・編集を行うことができる。また、Issue一覧ページからIssueを閲覧できる。ログイン時にはどのページからもログアウトをすることができ、ログアウトをした場合には、新規アカウント作成もしくはログインをするページに戻ることができる。
+	
+	\section{機能要求}
+	ここでは、具体的な機能について記述する。また、機能は実装の優先順位順に記述していく。1ヶ月の間で実装をするというスケジュールを考慮し、[最低限機能]と[発展機能]に機能を分類する。
+	
+		\subsection{[最低限機能] CSCWの向上}
+		\begin{itemize}
+			\item ユーザ名を追加
+			\\ \\
+			新規アカウント登録をする際に、ユーザ名を追加する欄を作り、アカウント情報にユーザ名を追加する。これにより、Issueごとに担当者を追加する際にも、現在アカウント登録されているユーザ名の中から担当者を選択することが可能になる。他にも、Issue一覧ページにユーザ名を表示することで、自分のログインしたアカウントが本当に自分のアカウントであるのかというのも明確にわかるようになり、共同作業をする際には便利である。以下に、この機能を実装した場合の画面例を示す。
+			
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=17cm,bb=520 300 -200 27]{UserName1.png}
+			\caption{新規アカウント登録ページ}
+			\end{figure}
+			
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=17cm,bb=400 300 -200 27]{UserName2.png}
+			\caption{Issue一覧ページにユーザ名を表示}
+			\end{figure}
+		
+			\item Issue一覧の共有
+			\\ \\
+			複数人がIssueを管理していても、そのIssue一覧が共有されなければ共同で作業を進めることはできない。そのために、他の誰かがIssueを追加した場合に、自分のIssue一覧にそのIssueが追加されていなければいけない。そのための機能である。以下に、画面例を示す。
+			
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=17cm,bb=200 300 -200 27]{IssueListShare.png}
+			\caption{Issue一覧の共有}
+			\end{figure}
+		
+			\item 議論構造の共有
+			\\ \\
+			Issue一覧の共有と同様に、議論構造に関しても、議論構造の変更が共有されていなければ、共同で作業を進めることはできない。そのための機能である。以下に、画面例を示す。
+			
+			\begin{figure}[H]
+			\centering
+			\includegraphics[width=17cm,bb=200 300 -200 27]{GraphShare.png}
+			\caption{議論構造の共有}
+			\end{figure}
+			
+		\end{itemize}
+		
+		共有に関して、現在の実装の説明では、ほぼ同時に複数ユーザが編集をした際に編集のコンフリクトが起こる可能性がある。このことを予防するために、何かの対策を取らなければならない。現時点では、あるユーザが議論構造ページで編集をしている際に、他のユーザが議論構造ページに移動する場合に、読み取りしかできないというような実装を考えている。この共有に関する問題点は、具体的にどのような対策をするかまでは確定していない。
+		
+		\subsection{[最低限機能] プロジェクトごとのグループ化}
+		多くのIssueが追加された場合の見づらさを防止するために、Issueをプロジェクトごとに管理する。具体的には、プロジェクトを手動で追加し、プロジェクトごとにIssueを追加できるようにする。そうすることで、プロジェクトごとにIssueをグループ化でき、見やすさが向上する。以下に、画面例を示す。
+		
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=17cm,bb=700 300 -200 27]{ProjectList.png}
+		\caption{プロジェクト一覧ページ}
+		\end{figure}
+		
+		まず、今まではIssue一覧であったページをプロジェクト一覧ページに変える。こうすることで、まず閲覧したいプロジェクトを選択することになる。
+			
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=17cm,bb=500 300 -200 27]{ProjectAdd.png}
+		\caption{プロジェクト新規登録ページ}
+		\end{figure}
+		
+		また、プロジェクト一覧ページでは新規にプロジェクトを追加することもできる。
+		
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=17cm,bb=500 300 -200 27]{ProjectIssueList.png}
+		\caption{プロジェクトごとのIssue一覧}
+		\end{figure}
+		
+		プロジェクト一覧ページのプロジェクトを選択すると、そのプロジェクト内のIssue一覧を閲覧することができる。また、Issueを追加したい場合には、プロジェクト内の新規Issue作成ボタンから、プロジェクトごとにIssueを追加することができる
+		
+		\subsection{[最低限機能] プロジェクトごとに自動タグ付けを登録}
+		現在では、Issueを登録した際に、コメントに自動でタグ付けがされるようになっている。しかし、そのタグ付けはあらかじめ用意されているタグ付けのみである。そのため、上に述べたプロジェクトごとに、自動で、タグ付けをするものを登録できるようにする。登録ページでは、自動でタグ付けをしたい議論参加者名と、その議論参加者名にどのようなタグ付けをしたいかを入力して登録する。以下に、画面例を示す。
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=17cm,bb=500 300 -200 27]{TagAdd.png}
+		\caption{自動タグ付け登録ページ}
+		\end{figure}
+		
+		画面例として示しているが、実際にはもう少しユーザビリティを向上したいと考えている。この画面では一度に登録できるのが1組だけだが、そうではなく複数の登録をまとめてできるような入力フォームにすべきである。
+
+		\subsection{[発展機能] タグに対するフィルタリングの種類の追加}
+		現状では、フィルタリング機能はTagを一つ選択するとそのタグが付いているコメントがフィルタリングされる。しかし、そのようなフィルタリングだけでなく、選択したタグを持っているコメントだけを非表示にするフィルタリングや、複数タグを選択してフィルタリングをすることもできるようにする。
+
+		\subsection{[発展機能] 複数Issue間の関係の可視化}
+		概要でも記述した通り、JiraではIssue間に関係が存在する。その関係を現状では取り込むことができておらず、どのIssueとどのIssueが関係し合っているのかを確認できない。このことを改善するために、IssueごとにJiraでのIssue間の関係を表示するような機能をつける。以下に、画面例を示す。
+		
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=17cm,bb=300 300 -200 27]{RelatesVisualize.png}
+		\caption{Issue間の関係の可視化}
+		\end{figure}
+		
+		上に示す通り、Issue一覧でのそれぞれのIssueについて、ひし形のボタンをクリックすると、下にそのIssueの関係しているIssueを表示するようにしている。また、表示したIssueがすでにIssue一覧に存在すれば、リンクを貼りそのIssueの議論構造に移動することができるようにする。
+
+		\subsection{[発展機能] Issueごとに担当者・状態の管理}
+		ここでは、Issue一つ一つに対して、担当者・状態をつけることができるようにする。こうすることで、そのIssueは誰が管理していて、どのような状態であるかを皆が共有することができる。担当者は存在するアカウントのユーザ名の中から選択することができ、状態はこちらでいくつか用意した状態の中から選択する形にする。以下に、画面例を示す。
+		
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=17cm,bb=500 300 -200 27]{IssueManager.png}
+		\caption{担当者の管理}
+		\end{figure}
+		
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=17cm,bb=500 300 -200 27]{IssueState.png}
+		\caption{状態の管理}
+		\end{figure}
+
+		\subsection{[発展機能] 議論構造の編集・整理のユーザビリティ向上}
+		全ての機能の実装が終わった場合に、実装する機能である。議論構造の編集は現在使いやすいものとは言えない。そのため、いくつかの機能を実装することで、議論構造の編集を簡単なものにする。現状では、議論構造の編集はコメントのノードをクリックした際に出るポップアップからしかできない。なので、議論構造の変更をドラッグなどの使いやすい実装に変えることを考えている。また、議論構造のリセットもできるようにすることで、議論構造を作り直したいときに便利である。他にも議論構造の編集・整理のユーザビリティが向上する実装を適用していくつもりである。
+
+	\section{データベース要求}
+	
+	以下に、作成する機能に関わる、重要なテーブルとテーブルに設けるカラムの内容を中心に説明する。また、機能に関わるもしくは新しく追加したカラムに関しては太文字で強調をしている。
+	
+	\begin{itemize}
+	
+		\subsection{userテーブル}
+		\item id
+		\item {\bf email (メールアドレス)}
+		\item {\bf username (ユーザ名)}
+		\item role
+		\item {\bf encrypted\_passward (パスワード)}
+		\item reset\_password\_token
+		\item reset\_password\_sent\_at 
+		\item remember\_created\_at
+		\item sign\_in\_count
+		\item current\_sign\_in\_at
+		\item last\_sign\_in\_at
+		\item current\_sign\_in\_ip
+		\item last\_sign\_in\_ip
+		\item created\_at
+		\item updated\_at \\
+		
+		このテーブルでは、アカウントごとにメールアドレス、ユーザ名、パスワードを持つ。
+		
+		\subsection{projectテーブル}
+		\item {\bf id}
+		\item {\bf name (プロジェクト名)} \\
+
+		新しく作成したテーブルである。プロジェクトごとにプロジェクト名を持つ。
+		
+		\subsection{issueテーブル}
+		\item id
+		\item url
+		\item type\_text
+		\item title 
+		\item created\_at
+		\item updated\_at
+		\item {\bf project\_id (プロジェクトid)}
+		\item {\bf user\_id (担当者のユーザid)}
+		\item {\bf status\_type (状態の種類)} \\
+		
+		このテーブルでは新しく、プロジェクトid、担当者のユーザid、状態の種類を持つ。
+		
+		\subsection{issue\_relationテーブル}
+		\item {\bf id}
+		\item {\bf issue\_id (どのissueに関する関係か)}
+		\item {\bf text (関係の内容)} \\
+		
+		新しく作成したテーブルである。複数Issue間の関係の可視化のために用意したもので、どのissueに関する関係なのか、どのような関係があるのかなどの情報を持つ。
+
+		\subsection{commentテーブル}
+		\item id
+		\item {\bf issue\_id (コメントの所属するissue)}
+		\item {\bf author (コメントをした人)}
+		\item {\bf content (コメントの内容)}
+		\item type\_text
+		\item jira\_id
+		\item internal\_id
+		\item created\_at
+		\item updated\_at \\
+		
+		このテーブルでは、所属しているissue、コメントをした人、コメントの内容などを持つ。
+
+		\subsection{edgeテーブル}
+		\item id
+		\item user\_id
+		\item {\bf comment\_id (どのコメントからのedgeなのか)}
+		\item {\bf to\_comment\_id (どのコメントへのedgeなのか)}
+		\item type\_text
+		\item created\_at
+		\item updated\_at
+		\item reason \\
+
+		このテーブルでは、議論構造において、どのコメントとどのコメントをつないでいるのかなどの情報を持っている。
+		
+		\subsection{tagテーブル}
+		\item id
+		\item user\_id
+		\item {\bf comment\_id (どのコメントについているタグなのか)}
+		\item {\bf content (タグの内容)}
+		\item created\_at
+		\item updated\_at \\
+		
+		このテーブルでは、タグがどのコメントについているのか、タグの内容は何かなどの情報を持っている。
+
+		\subsection{auto\_tag\_authorテーブル}
+		\item id
+		\item name
+		\item created\_at
+		\item updated\_at
+		\item {\bf tag\_content (自動タグ付けするタグの内容)}
+		\item {\bf project\_id (どのプロジェクトに関するものなのか)} \\
+		
+		このテーブルは元々、ツールがコメントをする場合の議論参加者名(botなど)のみを対象としていたテーブルであるが、今回の機能の追加により自動タグ付けをする議論参加者名全体を対象とするテーブルに変更した。そのため、どのようなタグが議論参加者名に対して存在するのか、またプロジェクトごとに議論作者名を登録するため、どのプロジェクトに適用する自動タグ付けなのかなどを情報として持つようにした。
+
+		\subsection{bookmarkテーブル}
+		\item id
+		\item user\_id
+		\item comment\_id (どのコメントに対するブックマークか)
+		\item created\_at
+		\item updated\_at \\
+		
+		このテーブルでは、ブックマーク機能のために、どのコメントに対するブックマークなのかなどを持っている。
+		
+		\subsection{その他のテーブル}
+		
+		そのほかにもいくつかテーブルがあるが、機能に関わるものでは無いのでテーブル名だけ列挙する。
+		
+		\item logテーブル
+		\item schema\_migrationテーブル
+		\item versionsテーブル
+		\item ar\_internalテーブル
+		
+	\end{itemize}
+	
+	\section{ソフトウェア属性}
+	
+		\subsection{使用性}
+		本企画では、ただ使いやすいものになっていたり多くの機能があることに比べて、複数の人が共同で作業できるツールにすることが求められている。そのため、ユーザビリティにも気を配るが、主としてCSCWに着手しなければならない。そのことを意識した機能の実装順序にもなっている。また、ツール使用者の要求の優先順位も合わせて考慮し、より使いやすいツールを実現する。
+		
+		\subsection{拡張性}
+		CSCWの向上という機能の中で、共同作業支援に関する、別の機能を追加しようとした場合にも柔軟に対応できるようなデータベース設計をする。また、ITSとしてJira以外に対してもこのツールを適用させようとした場合に、プロジェクトごとにIssueをグルーピングすることで、プロジェクトごとにITSを対応づけることが可能である。
+		
+		\subsection{移植性}
+		本ツールは、元々「DiscussionVisualizer」の実装にも使われていて、広くWebアプリケーション開発に使われているRuby on Railsを使うことで移植性を高める。
+
+\end{document}
+
+%写真の貼り付けテンプレ
+\begin{figure}[H]
+\centering
+\includegraphics[width=17cm,bb=220 300 -200 27]{firstclass.png}
+\caption{設計当初のクラス図}
+\end{figure}
+
+%ソースコードの貼り付けテンプレ
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, frame=single, numbers=left]
+
+\end{lstlisting}

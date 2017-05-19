@@ -1,0 +1,35 @@
+\contentsline {chapter}{\numberline {第1章}仕様書の概要}{4}
+\contentsline {section}{\numberline {1.1}目的}{4}
+\contentsline {section}{\numberline {1.2}範囲}{4}
+\contentsline {section}{\numberline {1.3}用語定義}{4}
+\contentsline {section}{\numberline {1.4}概要}{5}
+\contentsline {chapter}{\numberline {第2章}全容}{6}
+\contentsline {section}{\numberline {2.1}製品の背景}{6}
+\contentsline {section}{\numberline {2.2}製品機能}{6}
+\contentsline {section}{\numberline {2.3}仮定および依存性}{7}
+\contentsline {chapter}{\numberline {第3章}要求仕様}{8}
+\contentsline {section}{\numberline {3.1}外部インターフェイス要求}{8}
+\contentsline {subsection}{\numberline {3.1.1}ユーザインターフェイス要求}{8}
+\contentsline {section}{\numberline {3.2}機能要求}{8}
+\contentsline {subsection}{\numberline {3.2.1}[最低限機能] CSCWの向上}{8}
+\contentsline {subsection}{\numberline {3.2.2}[最低限機能] プロジェクトごとのグループ化}{12}
+\contentsline {subsection}{\numberline {3.2.3}[最低限機能] プロジェクトごとに自動タグ付けを登録}{13}
+\contentsline {subsection}{\numberline {3.2.4}[発展機能] タグに対するフィルタリングの種類の追加}{14}
+\contentsline {subsection}{\numberline {3.2.5}[発展機能] 複数Issue間の関係の可視化}{14}
+\contentsline {subsection}{\numberline {3.2.6}[発展機能] Issueごとに担当者・状態の管理}{15}
+\contentsline {subsection}{\numberline {3.2.7}[発展機能] 議論構造の編集・整理のユーザビリティ向上}{16}
+\contentsline {section}{\numberline {3.3}データベース要求}{17}
+\contentsline {subsection}{\numberline {3.3.1}userテーブル}{17}
+\contentsline {subsection}{\numberline {3.3.2}projectテーブル}{18}
+\contentsline {subsection}{\numberline {3.3.3}issueテーブル}{18}
+\contentsline {subsection}{\numberline {3.3.4}issue\_relationテーブル}{19}
+\contentsline {subsection}{\numberline {3.3.5}commentテーブル}{19}
+\contentsline {subsection}{\numberline {3.3.6}edgeテーブル}{20}
+\contentsline {subsection}{\numberline {3.3.7}tagテーブル}{20}
+\contentsline {subsection}{\numberline {3.3.8}auto\_tag\_authorテーブル}{21}
+\contentsline {subsection}{\numberline {3.3.9}bookmarkテーブル}{21}
+\contentsline {subsection}{\numberline {3.3.10}その他のテーブル}{22}
+\contentsline {section}{\numberline {3.4}ソフトウェア属性}{22}
+\contentsline {subsection}{\numberline {3.4.1}使用性}{22}
+\contentsline {subsection}{\numberline {3.4.2}拡張性}{23}
+\contentsline {subsection}{\numberline {3.4.3}移植性}{23}
