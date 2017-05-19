@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {3.1.1}ユーザインターフェイス要求}{8}
 \contentsline {section}{\numberline {3.2}機能要求}{8}
 \contentsline {subsection}{\numberline {3.2.1}[最低限機能] CSCWの向上}{8}
-\contentsline {subsection}{\numberline {3.2.2}[最低限機能] プロジェクトごとのグループ化}{12}
+\contentsline {subsection}{\numberline {3.2.2}[最低限機能] プロジェクトごとのグループ化}{11}
 \contentsline {subsection}{\numberline {3.2.3}[最低限機能] プロジェクトごとに自動タグ付けを登録}{13}
 \contentsline {subsection}{\numberline {3.2.4}[発展機能] タグに対するフィルタリングの種類の追加}{14}
 \contentsline {subsection}{\numberline {3.2.5}[発展機能] 複数Issue間の関係の可視化}{14}
