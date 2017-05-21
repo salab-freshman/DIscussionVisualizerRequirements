@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2016.11.29)  18 MAY 2017 20:08
+This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.euc) (TeX Live 2016) (preloaded format=platex 2016.11.29)  21 MAY 2017 15:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -249,7 +249,7 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 50.
 
-Overfull \hbox (77.96999pt too wide) in paragraph at lines 63--75
+Overfull \hbox (79.69168pt too wide) in paragraph at lines 64--79
  [][][] 
  []
 
@@ -258,104 +258,104 @@ Overfull \hbox (77.96999pt too wide) in paragraph at lines 63--75
 
 ] [5]
 第 2 章
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 98.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 104.
+
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 98.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 104.
  [6
 
 ] [7]
 第 3 章
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 138.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 144.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 138.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 144.
 [8
 
 ]
 File: UserName1.png Graphic file (type bmp)
  <UserName1.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 152--153
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 158--159
  [][] 
  []
 
 File: UserName2.png Graphic file (type bmp)
 <UserName2.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 158--159
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 164--165
  [][] 
  []
 
 [9]
 File: IssueListShare.png Graphic file (type bmp)
  <IssueListShare.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 168--169
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 174--175
  [][] 
  []
 
 File: GraphShare.png Graphic file (type bmp)
 <GraphShare.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 178--179
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 184--185
  [][] 
  []
 
 [10] [11]
 File: ProjectList.png Graphic file (type bmp)
  <ProjectList.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 191--192
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 197--198
  [][] 
  []
 
 File: ProjectAdd.png Graphic file (type bmp)
 <ProjectAdd.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 199--200
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 205--206
  [][] 
  []
 
 File: ProjectIssueList.png Graphic file (type bmp)
 <ProjectIssueList.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 207--208
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 213--214
  [][] 
  []
 
 [12]
 File: TagAdd.png Graphic file (type bmp)
  <TagAdd.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 217--218
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 223--224
  [][] 
  []
 
 [13]
 File: RelatesVisualize.png Graphic file (type bmp)
  <RelatesVisualize.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 231--232
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 237--238
  [][] 
  []
 
 [14]
 File: IssueManager.png Graphic file (type bmp)
  <IssueManager.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 242--243
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 248--249
  [][] 
  []
 
 [15]
 File: IssueState.png Graphic file (type bmp)
  <IssueState.png>
-Overfull \hbox (53.69221pt too wide) in paragraph at lines 248--249
+Overfull \hbox (53.69221pt too wide) in paragraph at lines 254--255
  [][] 
  []
 
-[16] [17] [18] [19] [20] [21] [22] [23] (./荀^^81羆^^82篁^^95罕^^98�^^9b�.aux) 
-) 
+[16] [17] [18] [19] [20] [21] [22] (./荀^^81羆^^82篁^^95罕^^98�^^9b�.aux) ) 
 Here is how much of TeX's memory you used:
- 3008 strings out of 493693
- 41694 string characters out of 6149786
+ 3016 strings out of 493693
+ 41827 string characters out of 6149786
  110096 words of memory out of 5000000
- 6532 multiletter control sequences out of 15000+600000
- 17702 words of font info for 71 fonts, out of 8000000 for 9000
+ 6540 multiletter control sequences out of 15000+600000
+ 19713 words of font info for 79 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 27i,11n,32p,605b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,11n,32p,605b,364s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 荀^^81羆^^82篁^^95罕^^98�^^9b�.dvi (23 pages, 43368 bytes).
+Output written on 荀^^81羆^^82篁^^95罕^^98�^^9b�.dvi (22 pages, 44684 bytes).
